@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pszczepanski.pl - Strona Główna</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #667eea;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .contact-info {
+            padding: 3rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-right: 1rem;
+            width: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: #ccc;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #ffd700;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 1rem;
+            text-align: center;
+            color: #ccc;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Edit Mode Styles */
+        .edit-mode {
+            position: relative;
+        }
+
+        .edit-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(255, 215, 0, 0.9);
+            padding: 5px 10px;
+            border-radius: 0 0 0 10px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .edit-mode:hover .edit-overlay {
+            opacity: 1;
+        }
+
+        .editable {
+            border: 2px dashed transparent;
+            padding: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        .editable:hover {
+            border-color: #ffd700;
+        }
+
+        .editable[contenteditable="true"] {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1001;
+            display: none;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-btn {
+            background: #667eea;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            width: 100%;
+        }
+
+        .admin-btn:hover {
+            background: #5a6fd8;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(102, 126, 234, 0.95);
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-panel {
+                right: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <h3>Panel Edycji</h3>
+        <button class="admin-btn" onclick="toggleEditMode()">
+            <i class="fas fa-edit"></i> Tryb Edycji
+        </button>
+        <button class="admin-btn" onclick="openImageUpload()">
+            <i class="fas fa-image"></i> Zmień Zdjęcia
+        </button>
+        <button class="admin-btn" onclick="saveChanges()">
+            <i class="fas fa-save"></i> Zapisz Zmiany
+        </button>
+        <button class="admin-btn" onclick="loadBackup()">
+            <i class="fas fa-undo"></i> Przywróć Kopię
+        </button>
+    </div>
+
+    <!-- Image Upload Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <h3>Zmień Zdjęcie</h3>
+            <input type="file" id="imageUpload" accept="image/*" style="margin: 20px 0;">
+            <button class="admin-btn" onclick="uploadImage()">Wgraj Zdjęcie</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo editable" data-key="logo">Pszczepanski.pl</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Strona Główna</a></li>
+                <li><a href="#about">O Mnie</a></li>
+                <li><a href="#services">Usługi</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+            <button class="mobile-menu" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <button class="admin-btn" onclick="toggleAdminPanel()" style="margin-left: 20px;">
+                <i class="fas fa-cog"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="editable" data-key="hero-title">Witaj na mojej stronie</h1>
+                <p class="editable" data-key="hero-subtitle">Profesjonalna strona osobista z możliwością edycji treści</p>
+                <a href="#about" class="cta-button editable" data-key="hero-cta">Poznaj mnie bliżej</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title editable" data-key="about-title">O Mnie</h2>
+            <div class="about-content">
+                <div class="about-image edit-mode">
+                    <img src="https://via.placeholder.com/300x300/667eea/white?text=Twoje+Zdjęcie" alt="Zdjęcie profilowe" class="profile-img" id="profileImg" onclick="selectImage(this)">
+                    <div class="edit-overlay" onclick="selectImage(document.getElementById('profileImg'))">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <p class="editable" data-key="about-text-1">
+                        Jestem profesjonalistą z wieloletnim doświadczeniem w swojej dziedzinie. 
+                        Pasjonuję się rozwojem osobistym i dzieleniem się wiedzą z innymi.
+                    </p>
+                    <p class="editable" data-key="about-text-2">
+                        Moja filozofia opiera się na ciągłym uczeniu się i doskonaleniu swoich umiejętności. 
+                        Wierzę, że każdy dzień to nowa okazja do rozwoju i osiągnięcia swoich celów.
+                    </p>
+                    <p class="editable" data-key="about-text-3">
+                        Na tej stronie dzielę się swoimi doświadczeniami, przemyśleniami i projektami. 
+                        Zapraszam do zapoznania się z moją pracą i nawiązania współpracy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title editable" data-key="services-title">Moje Usługi</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3 class="editable" data-key="service-1-title">Programowanie</h3>
+                    <p class="editable" data-key="service-1-desc">Tworzenie nowoczesnych aplikacji webowych i mobilnych z wykorzystaniem najnowszych technologii.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-palette"></i></div>
+                    <h3 class="editable" data-key="service-2-title">Design</h3>
+                    <p class="editable" data-key="service-2-desc">Projektowanie interfejsów użytkownika i doświadczeń cyfrowych o wysokiej jakości.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="editable" data-key="service-3-title">Konsulting</h3>
+                    <p class="editable" data-key="service-3-desc">Doradztwo biznesowe i strategiczne wsparcie w rozwoju projektów technologicznych.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <h2 class="section-title editable" data-key="blog-title">Najnowsze Wpisy</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <div class="edit-mode">
+                        <img src="https://via.placeholder.com/400x200/764ba2/white?text=Artykuł+1" alt="Blog post" class="blog-image" onclick="selectImage(this)">
+                        <div class="edit-overlay" onclick="selectImage(this.previousElementSibling)">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta editable" data-key="blog-1-date">15 stycznia 2024</div>
+                        <h3 class="blog-title editable" data-key="blog-1-title">Jak zacząć swoją przygodę z programowaniem</h3>
+                        <p class="editable" data-key="blog-1-excerpt">Przewodnik dla początkujących programistów - od wyboru języka programowania po pierwsze projekty.</p>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <div class="edit-mode">
+                        <img src="https://via.placeholder.com/400x200/667eea/white?text=Artykuł+2" alt="Blog post" class="blog-image" onclick="selectImage(this)">
+                        <div class="edit-overlay" onclick="selectImage(this.previousElementSibling)">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta editable" data-key="blog-2-date">10 stycznia 2024</div>
+                        <h3 class="blog-title editable" data-key="blog-2-title">Trendy w designie UI/UX na 2024 rok</h3>
+                        <p class="editable" data-key="blog-2-excerpt">Przegląd najnowszych trendów w projektowaniu interfejsów użytkownika i doświadczeń cyfrowych.</p>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <div class="edit-mode">
+                        <img src="https://via.placeholder.com/400x200/9575cd/white?text=Artykuł+3" alt="Blog post" class="blog-image" onclick="selectImage(this)">
+                        <div class="edit-overlay" onclick="selectImage(this.previousElementSibling)">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta editable" data-key="blog-3-date">5 stycznia 2024</div>
+                        <h3 class="blog-title editable" data-key="blog-3-title">Budowanie osobistej marki w internecie</h3>
+                        <p class="editable" data-key="blog-3-excerpt">Strategie i narzędzia do budowania silnej obecności online i rozwijania osobistej marki.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title editable" data-key="contact-title">Skontaktuj się ze mną</h2>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Imię i nazwisko</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Adres email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Wiadomość</label>
+                            <textarea id="message" name="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Wyślij wiadomość</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span class="editable" data-key="contact-email">kontakt@pszczepanski.pl</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span class="editable" data-key="contact-phone">+48 123 456 789</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="editable" data-key="contact-address">Warszawa, Polska</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <span class="editable" data-key="contact-website">www.pszczepanski.pl</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="editable" data-key="footer-about-title">O stronie</h3>
+                    <p class="editable" data-key="footer-about-text">
+                        Profesjonalna strona osobista z możliwością łatwej edycji treści i zdjęć. 
+                        Wszystkie elementy można modyfikować bez znajomości programowania.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 class="editable" data-key="footer-links-title">Szybkie linki</h3>
+                    <a href="#home">Strona główna</a>
+                    <a href="#about">O mnie</a>
+                    <a href="#services">Usługi</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#contact">Kontakt</a>
+                </div>
+                <div class="footer-section">
+                    <h3 class="editable" data-key="footer-social-title">Śledź mnie</h3>
+                    <div class="social-links">
+                        <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="editable" data-key="footer-copyright">&copy; 2024 Pszczepanski.pl. Wszystkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Edit Mode Variables
+        let editMode = false;
+        let selectedImage = null;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSavedContent();
+            setupSmoothScrolling();
+            setupContactForm();
+        });
+
+        // Admin Panel Functions
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('active');
+        }
+
+        function toggleEditMode() {
+            editMode = !editMode;
+            const editables = document.querySelectorAll('.editable');
+            
+            editables.forEach(element => {
+                if (editMode) {
+                    element.contentEditable = true;
+                    element.style.border = '2px dashed #ffd700';
+                } else {
+                    element.contentEditable = false;
+                    element.style.border = 'none';
+                    saveElementContent(element);
+                }
+            });
+            
+            // Update button text
+            const button = event.target;
+            button.innerHTML = editMode ? 
+                '<i class="fas fa-times"></i> Zakończ Edycję' : 
+                '<i class="fas fa-edit"></i> Tryb Edycji';
+        }
+
+        function saveChanges() {
+            const contentData = {};
+            const editables = document.querySelectorAll('.editable');
+            
+            editables.forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (key) {
+                    contentData[key] = element.innerHTML;
+                }
+            });
+            
+            // Save images
+            const images = document.querySelectorAll('img');
+            const imageData = {};
+            images.forEach((img, index) => {
+                if (img.id) {
+                    imageData[img.id] = img.src;
+                } else {
+                    imageData[`image_${index}`] = img.src;
+                }
+            });
+            
+            localStorage.setItem('websiteContent', JSON.stringify(contentData));
+            localStorage.setItem('websiteImages', JSON.stringify(imageData));
+            
+            alert('Zmiany zostały zapisane!');
+        }
+
+        function loadSavedContent() {
+            const savedContent = localStorage.getItem('websiteContent');
+            const savedImages = localStorage.getItem('websiteImages');
+            
+            if (savedContent) {
+                const contentData = JSON.parse(savedContent);
+                Object.keys(contentData).forEach(key => {
+                    const element = document.querySelector(`[data-key="${key}"]`);
+                    if (element) {
+                        element.innerHTML = contentData[key];
+                    }
+                });
+            }
+            
+            if (savedImages) {
+                const imageData = JSON.parse(savedImages);
+                Object.keys(imageData).forEach(key => {
+                    const img = document.getElementById(key) || 
+                               document.querySelector(`img[data-key="${key}"]`);
+                    if (img) {
+                        img.src = imageData[key];
+                    }
+                });
+            }
+        }
+
+        function loadBackup() {
+            if (confirm('Czy na pewno chcesz przywrócić pierwotną zawartość strony?')) {
+                localStorage.removeItem('websiteContent');
+                localStorage.removeItem('websiteImages');
+                location.reload();
+            }
+        }
+
+        function saveElementContent(element) {
+            const key = element.getAttribute('data-key');
+            if (key) {
+                const savedContent = JSON.parse(localStorage.getItem('websiteContent') || '{}');
+                savedContent[key] = element.innerHTML;
+                localStorage.setItem('websiteContent', JSON.stringify(savedContent));
+            }
+        }
+
+        // Image Management
+        function selectImage(imgElement) {
+            selectedImage = imgElement;
+            openImageUpload();
+        }
+
+        function openImageUpload() {
+            document.getElementById('imageModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+            selectedImage = null;
+        }
+
+        function uploadImage() {
+            const fileInput = document.getElementById('imageUpload');
+            const file = fileInput.files[0];
+            
+            if (file && selectedImage) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    selectedImage.src = e.target.result;
+                    
+                    // Save to localStorage
+                    const savedImages = JSON.parse(localStorage.getItem('websiteImages') || '{}');
+                    const imageKey = selectedImage.id || `image_${Date.now()}`;
+                    savedImages[imageKey] = e.target.result;
+                    localStorage.setItem('websiteImages', JSON.stringify(savedImages));
+                    
+                    closeModal();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth Scrolling
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Contact Form
+        function setupContactForm() {
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const message = formData.get('message');
+                
+                // Here you would typically send the data to a server
+                alert(`Dziękuję za wiadomość, ${name}! Odpowiem wkrótce na adres ${email}.`);
+                this.reset();
+            });
+        }
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('imageModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+            
+            const adminPanel = document.getElementById('adminPanel');
+            if (!adminPanel.contains(e.target) && !e.target.closest('button')) {
+                adminPanel.classList.remove('active');
+            }
+        });
+
+        // Auto-save while editing
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('editable') && editMode) {
+                clearTimeout(window.autoSaveTimeout);
+                window.autoSaveTimeout = setTimeout(() => {
+                    saveElementContent(e.target);
+                }, 1000);
+            }
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + S to save
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                saveChanges();
+            }
+            
+            // Escape to exit edit mode
+            if (e.key === 'Escape' && editMode) {
+                toggleEditMode();
+            }
+        });
+    </script>
+</body>
+</html>
